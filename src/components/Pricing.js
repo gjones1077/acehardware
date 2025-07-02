@@ -17,8 +17,8 @@ const acebaseRef = collection(db, "screen-intake");
 function Pricing(props) {
     const [price, setPrice] = useState(0);
     const [displayText, setDisplayText] = useState('');
-    const {length, height, material, quantity, lastPrice} = props.formData;
-    const { onPriceCalculated } = props; 
+    const {length, height, material, quantity, index} = props.formData;
+    const { updateTotal, priceList, removeEntry, clearData, onLastPriceUpdate } = props; 
 
     const getPrice = async () => {
         let swapped = false;
@@ -78,14 +78,18 @@ function Pricing(props) {
                 const data = doc.data();
                 const adjustedPrice = data.pricing[material] * quantity;
                 setPrice(adjustedPrice);
+                onLastPriceUpdate && onLastPriceUpdate(index, adjustedPrice);
+                updateTotal(false, adjustedPrice);
                 console.log("Quantity: ", quantity);
                 console.log("Material: ", material);
+                console.log("Index: ", index);
                 querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
                     console.log(doc.id, " => ", doc.data());
                 });
+                
                 setDisplayText(`Match Found! ${data.length}x${data.height} `);
-                onPriceCalculated?.(adjustedPrice);
+                updateTotal(false, adjustedPrice);
             }
         }     
     }
@@ -93,9 +97,18 @@ function Pricing(props) {
     return (
         <>
             <button onClick={(e) => {e.preventDefault(); getPrice();}}>
-                Calculate
+                Search
             </button>
-            <p>{displayText} -- ${price}.00</p>
+            <button onClick={(e) => {e.preventDefault(); updateTotal(true, price); setPrice(0); setDisplayText(''); clearData(index)}}>
+                Clear Entry
+            </button>
+            {index > 0 ? 
+                <button type="button" 
+                    onClick={() => removeEntry(index)}>
+                    Remove Entry
+                </button>  
+            : null}
+            <p>{displayText} -- ${price}.00 </p>
         </>
         
     )

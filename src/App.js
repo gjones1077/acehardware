@@ -29,12 +29,13 @@ function App() {
 
   return (
     <div className="App">
-      
-      <h1>Screen Shop Tips</h1>
-      <nav className='js-toc'></nav>
+      <div className="App-header">
+        <h1>Screen Shop Reference </h1>
+        <nav className='js-toc'></nav>
+      </div>
       <main>
-        
-        <h2 id="1">Changing Glass Blades</h2>
+        <div className="glass-cutting-section" id="glass-cutting">
+        <h2 id="1">Glass Cutting</h2>
         <p>   
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dolore esse fugiat inventore mollitia
           nam
@@ -61,6 +62,7 @@ function App() {
           officiis perferendis veniam.
           Asperiores blanditiis ea enim esse explicabo nam necessitatibus obcaecati officia sunt ut.
         </p>
+        </div>
         <h2 id="3">Propane</h2>
         <p>   
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dolore esse fugiat inventore mollitia

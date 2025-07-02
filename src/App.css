@@ -1,67 +1,285 @@
-.App {
-  text-align: center;
+/* General page background and font */
+body, .App {
+  background: #fff;
+  color: #222;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
+/* Header styling */
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+  color: #fff;
+  padding: 32px 0 16px 0;
+  border-bottom: 4px solid #d32f2f;
+  text-align: center;
+  margin-bottom: 32px;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Wiki-style TOC nav */
+.js-toc {
+  background: #fff;
+  border: 1px solid #d32f2f;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin: 24px auto 32px auto;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(183,28,28,0.05);
+  font-size: 1.1rem;
+  text-align: left;
+  position: fixed;
+  top: 80px;
+
 }
 
+.js-toc .toc-list {
+  list-style-type: disc;
+  display: block;
+  padding-left: 24px; /* space for bullets */
+  margin: 0;
+}
+
+.js-toc .toc-list-item {
+  display: block;
+}
+
+.js-toc .toc-link {
+  display: list-item;
+  color: #b71c1c;
+  text-decoration: none;
+  padding: 0 0px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.js-toc .toc-link:hover {
+  color: #fff;
+  background: #b71c1c;
+  border-radius: 4px;
+  padding: 2px 8px;
+  text-decoration: underline;
+}
+
+
+/* Main content area */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(183,28,28,0.04);
+  padding: 32px 24px;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+  color: #b71c1c;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  border-bottom: 2px solid #d32f2f;
+  padding-bottom: 4px;
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+}
+
+/* Paragraphs and lists */
+p, ul, ol {
+  line-height: 1.7;
+  margin-bottom: 1.2em;
+}
+
+ul, ol {
+  padding-left: 2em;
+}
+
+/* Links */
+a {
+  color: #b71c1c;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #d32f2f;
+}
+
+/* Tab buttons */
 .tab-buttons {
   display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
 }
 
 .tab-button {
-  background-color: #ffffff;
-  border: none;
-  padding: 10px 20px;
+  background-color: #fff;
+  border: 2px solid #b71c1c;
+  color: #b71c1c;
+  padding: 10px 24px;
   cursor: pointer;
   height: 40px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px 6px 0 0;
+  margin: 0 4px;
+  transition: background 0.2s, color 0.2s;
 }
 
 .tab-button:hover {
-  background-color: #ddd;
-}
-
-.tab {
-  display: none;
-  width: 70%;
-  padding: 20px;
-  background-color: #ccc;
+  background-color: #b71c1c;
+  color: #fff;
 }
 
 .active-tab-button {
-  background-color: #ccc;
+  background-color: #b71c1c;
+  color: #fff;
   transform: scaleY(1.1);
   transform-origin: bottom;
 }
+
+/* Tab content */
+.tab {
+  display: none;
+  width: 70%;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #d32f2f;
+  border-radius: 0 0 8px 8px;
+  margin: 0 auto 32px auto;
+  box-shadow: 0 2px 8px rgba(183,28,28,0.04);
+}
+
+.tab[style*="block"] {
+  display: block;
+}
+
+/* Forms and inputs */
+form label {
+  color: #b71c1c;
+  font-weight: 500;
+}
+
+input, select, button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input[type="number"], select {
+  border: 1px solid #b71c1c;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin: 6px 0 12px 0;
+  width: 120px;
+}
+
+input[type="number"]:focus, select:focus {
+  outline: 2px solid #d32f2f;
+}
+
+button {
+  background: #b71c1c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 18px;
+  margin: 8px 4px 0 0;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #d32f2f;
+}
+
+/* Miscellaneous */
+::-webkit-scrollbar-thumb {
+  background: #b71c1c;
+}
+
+/* .glass-cutting-section {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(183,28,28,0.08);
+  border: 1.5px solid #e0e0e0;
+  padding: 32px 28px 28px 28px;
+  margin: 40px auto 32px auto;
+  max-width: 800px;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+.glass-cutting-section:hover {
+  box-shadow: 0 4px 24px rgba(183,28,28,0.16);
+  border-color: #b71c1c;
+}
+
+.glass-cutting-section h2 {
+  color: #b71c1c;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #b71c1c;
+  padding-bottom: 6px;
+}
+
+.glass-cutting-section p {
+  color: #333;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.glass-cutting-section ul,
+.glass-cutting-section ol {
+  margin: 18px 0 0 24px;
+  color: #444;
+  font-size: 1.08rem;
+}
+
+.glass-cutting-section strong,
+.glass-cutting-section b {
+  color: #b71c1c;
+  font-weight: 600;
+}
+
+.glass-cutting-section a {
+  color: #b71c1c;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.glass-cutting-section a:hover {
+  color: #d32f2f;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .glass-cutting-section {
+    padding: 18px 8px;
+    font-size: 1rem;
+  }
+  .glass-cutting-section h2 {
+    font-size: 1.3rem;
+  } 
+} */

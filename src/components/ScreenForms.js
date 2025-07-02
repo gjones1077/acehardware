@@ -19,15 +19,27 @@ function ScreenForms({activeTabIndex, toggleTab}) {
     const [screenList, setScreenList] = useState([]);
     const sortedScreenList = screenList.sort((a, b) => a.height - b.height);
     const [runningTotal, setRunningTotal] = useState(0);
+    const [priceList, setPriceList] = useState([]);
+    const [deleting, setDeleting] = useState(false);
+    const [formIndex, setFormIndex] = useState(0);
+    const [pformData, setPFormData] = useState({
+        length: '',
+        height: '',
+        quantity: 1,
+    });
     const [formData, setFormData] = useState({
         length: '',
         height: '',
         quantity: 1,
         material: '',
-        lastPrice: 0
+        lastPrice: 0,
     });
     const [formList, setFormList] = useState([
-        { length: "", height: "", quantity: 1, material: "default", lastPrice: 0 }
+        { length: "", height: "", quantity: 1, material: "default", index: formIndex, lastPrice: 0 }
+    ]);
+
+    const [pformList, setPFormList] = useState([
+        { length: "", height: "", quantity: 1 }
     ]);
 
     const handleLengthChange = (event) => {
@@ -71,30 +83,76 @@ function ScreenForms({activeTabIndex, toggleTab}) {
         });
     }
 
+    const phandleUserInput = (index, event) => {
+        const { name, value } = event.target;
+        const updatedFormList = [...pformList];
+        updatedFormList[index][name] = value;
+        setPFormList(updatedFormList);
+        setPFormData({
+            ...pformData,
+            [event.target.name]: event.target.value
+        });
+    }
+
+    const paddForm = () => {
+        setPFormList([...pformList, { length: "", height: "", quantity: 1 }]);
+    };
+
     const addForm = () => {
-        setFormList([...formList, { length: "", height: "", quantity: 1, material: "default" }]);
+        const newIndex = formList.length;
+        setFormList([...formList, { length: "", height: "", quantity: 1, material: "default", index: newIndex, lastPrice: 0 }]);
+        console.log("Index after add", newIndex); 
     };
 
-    const removeForm = (index) => {
-        const updatedFormList = formList.filter((_, i) => i !== index);
-        setFormList(updatedFormList);
+    const removeEntry = (index) => {
+        const updatedFormList = formList.filter((form) => form.index !== index);
+        if (!formList[index]) {
+            setFormList(updatedFormList);   
+        } else {
+            formList[index].lastPrice !== 0 ? updateTotal(true, formList[index].lastPrice) : updateTotal(true, 0);
+            console.log("Index and Updated Form List: ", index, updatedFormList);
+            setFormList(updatedFormList);
+        }   
     };
 
-    const updateTotal = (newAmount) => {
-        setRunningTotal((prev) => prev + newAmount);
-    }
+    const updateLastPrice = (index, newPrice) => {
+        setFormList(prev =>
+            prev.map((form, i) =>
+                i === index ? { ...form, lastPrice: newPrice } : form
+            )
+        );
+    };
 
-    const clearEntry = (index) => {
-        const updatedFormList = [...formList];
-        updatedFormList[index] = { length: "", height: "", quantity: 1, material: "default" };
-        setFormList(updatedFormList);
+    const updateTotal = (deleting, newAmount) => {
+        if (!deleting) {
+            if (formList.length === 1) {
+                setRunningTotal(0);
+            }
+            // setPriceList((prevList) => [...prevList, newAmount]);
+            setRunningTotal(runningTotal + newAmount);
+        } else {
+            // setPriceList((prevList) => prevList.filter((price) => price !== newAmount));
+            formList.length === 1 ? setRunningTotal(0) : setRunningTotal(runningTotal - newAmount);
+        }
     }
-    
+    const clearData = (index) => {
+        if (!formList[index]) {
+            setDisplayText("Error: no data to clear"); 
+        } else {
+            formList[index].length = "";
+            formList[index].height = "";
+            formList[index].quantity = 1;
+            formList[index].material = "default";
+        }
+        
+    }
     const clearForms = () => {
         const emptyFormList = [];
-        emptyFormList[0] = { length: "", height: "", quantity: 1, material: "default" };
+        emptyFormList[0] = { length: "", height: "", quantity: 1, material: "default", lastPrice: 0, index: 0 };
         setFormList(emptyFormList);
         setRunningTotal(0);
+        clearData(0);
+        setPriceList([]);
     }
 
     useEffect(() => {
@@ -209,33 +267,42 @@ function ScreenForms({activeTabIndex, toggleTab}) {
                             <option value="alu">Aluminum</option>
                             <option value="pet">Pet Screen</option>
                         </select>
-                        <button onClick={(e) => {e.preventDefault(); clearEntry(index);}}>Clear Entry</button>
-                        <Pricing key={index} formData={formData} onPriceCalculated={updateTotal}/>
-                        
+                        <Pricing 
+                            key={index} 
+                            formData={formData} 
+                            updateTotal={updateTotal} 
+                            // priceList={priceList} 
+                            removeEntry={removeEntry} 
+                            clearData={clearData}
+                            onLastPriceUpdate={updateLastPrice}/>
                     </form>
                 ))}
                 <button type="button" onClick={addForm}>Add Entry</button>
-                <button type="button" onClick={removeForm}>Remove Entry</button>
-                <button onClick={clearForms}>Clear All</button>
+                <button onClick={clearForms}>Reset</button>
                 <h3>Total Price: ${runningTotal}.00</h3>
             </div>
             <div class="tab" id="tab2" style={{ display: activeTabIndex === 1 ? "block" : "none"}}>
                 <h4>Tab 2 Content</h4>
                 <p>Description for Tab 2 goes here</p>
-                <form>
-                    <label>Length</label>
-                    <input type="number" onChange={(e) => handleLengthChange(e)} 
-                    value={length} onKeyDown={(e) => filterInput(e)} placeholder='inches'/>
-                    <label>Height</label>
-                    <input type="number" onChange={(e) => handleHeightChange(e)} 
-                    value={height} onKeyDown={(e) => filterInput(e)} placeholder='inches'/>                   
-                    <label>Quantity: </label>
-                    <input type="number" min="1" onChange={(e) => handleQuantityChange(e)}
-                        value={quantity} onKeyDown={(e) => filterInput(e)} />
-                    <button type="button" onClick={calcMats}>Calculate Materials</button>
-                    <button type="button" onClick={clearPickupData}>Clear</button>
-                    <p>{displayText}</p>
-                </form>
+                {pformList.map((pformData, index) => (
+                    <form>
+                        <label>Length</label>
+                        <input type="number" onChange={(e) => phandleUserInput(index, e)} 
+                        value={pformData.length} onKeyDown={(e) => filterInput(e)} placeholder='inches'/>
+                        <label>Height</label>
+                        <input type="number" onChange={(e) => phandleUserInput(index, e)} 
+                        value={pformData.height} onKeyDown={(e) => filterInput(e)} placeholder='inches'/>                   
+                        <label>Quantity: </label>
+                        <input type="number" min="1" onChange={(e) => phandleUserInput(index, e)}
+                            value={pformData.quantity} onKeyDown={(e) => filterInput(e)} />
+                        
+                        
+                    </form>
+                ))}
+                <p>{displayText}</p>
+                <button type="button" onClick={calcMats}>Calculate Materials</button>
+                <button type="button" onClick={paddForm}>Add New Size</button>
+                <button type="button" onClick={clearPickupData}>Clear</button>
             </div>
         </>
     );
