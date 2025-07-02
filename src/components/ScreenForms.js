@@ -3,11 +3,16 @@ import { db } from '../config/firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import Pricing from "./Pricing";
 
-{/* <h3>Current User Input:</h3>
-                        <h4>Length: {formData.length}</h4>
-                        <h4>Height: {formData.height}</h4>
-                        <h4>Quantity: {formData.quantity}</h4>
-                        <h4>Material: {formData.material}</h4> */}
+/* TODOs:
+    -By Friday:
+        -Test calculator functionality
+        -Add SKU data to the firebase database
+        -Add copy to clipboard functionality for repairstorm data
+    -Finish implementing the pickup tab calculator (should take multiple sizes)
+    -Add excellent CSS to the calculation section of the form 
+    -Start (and try to finish) glass pricing calculator
+    -Start propane scale setter and price calculator
+*/
 function ScreenForms({activeTabIndex, toggleTab}) {
     const lastStepRef = useRef(null);
     const intakeCollectionRef = collection(db, "screen-intake");
