@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { db } from '../config/firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import Pricing from "./Pricing";
-
+import MatsTable from "./MatsTable"
 /* TODOs:
     -By Friday:
         -Test calculator functionality
@@ -27,6 +27,7 @@ function ScreenForms({activeTabIndex, toggleTab}) {
     const [priceList, setPriceList] = useState([]);
     const [deleting, setDeleting] = useState(false);
     const [formIndex, setFormIndex] = useState(0);
+    const [pickupDisplayTexts, setPickupDisplayTexts] = useState([""]);
     const [pformData, setPFormData] = useState({
         length: '',
         height: '',
@@ -44,7 +45,7 @@ function ScreenForms({activeTabIndex, toggleTab}) {
     ]);
 
     const [pformList, setPFormList] = useState([
-        { length: "", height: "", quantity: 1 }
+        { length: "", height: "", quantity: 1 }  //add materials after main function working 
     ]);
 
     const handleLengthChange = (event) => {
@@ -66,15 +67,22 @@ function ScreenForms({activeTabIndex, toggleTab}) {
         setLength(0);
         setHeight(0);
         setQuantity(1);
-        setDisplayText('');
+        setPickupDisplayTexts([""]);
+        setPFormList([{ length: "", height: "", quantity: 1 }]);
     };
 
-    const calcMats = () => {
-        const adjustedLength = 2 * length;
-        const adjustedHeight = 2 * height;
-        const fabAmt = Math.ceil(adjustedLength / 12) * quantity;
-        const splAmt = Math.ceil((adjustedLength + adjustedHeight) / 12) * quantity;
-        setDisplayText(`Fabric Amount: ${fabAmt} feet, Spline Amount: ${splAmt} feet`);
+    const calcMats = (index) => {
+        const adjustedLength = 2 * pformList[index].length;
+        const adjustedHeight = 2 * pformList[index].height;
+        const fabAmt = Math.ceil(adjustedLength / 12) * pformList[index].quantity;
+        const splAmt = Math.ceil((adjustedLength + adjustedHeight) / 12) * pformList[index].quantity;
+        const newText = `Fabric Amount: ${fabAmt} feet, Spline Amount: ${splAmt} feet`;
+
+        setPickupDisplayTexts(prev => {
+            const updated = [...prev];
+            updated[index] = newText;
+            return updated;
+        });
     };
 
     const handleUserInput = (index, event) => {
@@ -101,6 +109,7 @@ function ScreenForms({activeTabIndex, toggleTab}) {
 
     const paddForm = () => {
         setPFormList([...pformList, { length: "", height: "", quantity: 1 }]);
+        setPickupDisplayTexts(prev => [...prev, ""]);
     };
 
     const addForm = () => {
@@ -286,30 +295,73 @@ function ScreenForms({activeTabIndex, toggleTab}) {
                 <button onClick={clearForms}>Reset</button>
                 <h3>Total Price: ${runningTotal}.00</h3>
             </div>
-            <div class="tab" id="tab2" style={{ display: activeTabIndex === 1 ? "block" : "none"}}>
-                <h4>Tab 2 Content</h4>
-                <p>Description for Tab 2 goes here</p>
-                {pformList.map((pformData, index) => (
-                    <form>
-                        <label>Length</label>
-                        <input type="number" onChange={(e) => phandleUserInput(index, e)} 
-                        value={pformData.length} onKeyDown={(e) => filterInput(e)} placeholder='inches'/>
-                        <label>Height</label>
-                        <input type="number" onChange={(e) => phandleUserInput(index, e)} 
-                        value={pformData.height} onKeyDown={(e) => filterInput(e)} placeholder='inches'/>                   
-                        <label>Quantity: </label>
-                        <input type="number" min="1" onChange={(e) => phandleUserInput(index, e)}
-                            value={pformData.quantity} onKeyDown={(e) => filterInput(e)} />
-                        
-                        
-                    </form>
-                ))}
-                <p>{displayText}</p>
-                <button type="button" onClick={calcMats}>Calculate Materials</button>
-                <button type="button" onClick={paddForm}>Add New Size</button>
-                <button type="button" onClick={clearPickupData}>Clear</button>
-            </div>
-        </>
+        <div className="tab" id="tab2" style={{ display: activeTabIndex === 1 ? "block" : "none" }}>
+            <h3>Pickup Calculator</h3>
+            {pformList.map((pformData, index) => (
+                <form key={index}>
+                    <label>Length: </label>
+                    <input
+                        name="length"
+                        type="number"
+                        onChange={(e) => phandleUserInput(index, e)}
+                        value={pformData.length}
+                        placeholder="Inches"
+                        min="18"
+                        max="60"
+                        onKeyDown={filterInput}
+                    />
+                    <br />
+
+                    <label>Height: </label>
+                    <input
+                        name="height"
+                        type="number"
+                        onChange={(e) => phandleUserInput(index, e)}
+                        value={pformData.height}
+                        placeholder="Inches"
+                        min="24"
+                        max="96"
+                        onKeyDown={filterInput}
+                    />
+                    <br />
+
+                    <label>Quantity: </label>
+                    <input
+                        name="quantity"
+                        type="number"
+                        min="1"
+                        onChange={(e) => phandleUserInput(index, e)}
+                        value={pformData.quantity}
+                        onKeyDown={filterInput}
+                    />
+                    <br />
+                    <button type="button" onClick={() => calcMats(index)}>Calculate Materials</button>
+                    <p>{pickupDisplayTexts[index]}</p>
+
+                    {index > 0 ? (
+                        <button
+                            type="button"
+                            className="close-btn"
+                            onClick={() => {
+                                const updated = pformList.filter((_, i) => i !== index);
+                                setPFormList(updated);
+                            }}
+                            aria-label="Remove Entry"
+                            title="Remove Entry"
+                        >
+                            &times;
+                        </button>
+                    ) : null}
+                </form>
+            ))}
+        <button type="button" onClick={paddForm}>Add New Size</button>
+        <button type="button" onClick={clearPickupData}>Reset</button>
+        <br/>
+        <br/>
+        <button onClick={toggleVisibility}>{isVisible ? 'Hide Material Table' : 'Show Material Table'}</button>
+        {isVisible && <MatsTable />}
+    </div>
+</>
     );
 }
 

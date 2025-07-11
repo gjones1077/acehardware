@@ -216,7 +216,7 @@ button:hover {
   background: #b71c1c;
 }
 
-/* .glass-cutting-section {
+.glass-cutting-section {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(183,28,28,0.08);
@@ -228,10 +228,6 @@ button:hover {
   transition: box-shadow 0.2s;
 }
 
-.glass-cutting-section:hover {
-  box-shadow: 0 4px 24px rgba(183,28,28,0.16);
-  border-color: #b71c1c;
-}
 
 .glass-cutting-section h2 {
   color: #b71c1c;
@@ -282,4 +278,33 @@ button:hover {
   .glass-cutting-section h2 {
     font-size: 1.3rem;
   } 
-} */
+}
+.pickup-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  font-size: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(183,28,28,0.04);
+}
+
+.pickup-table th, .pickup-table td {
+  border: 1px solid #d32f2f;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.pickup-table th {
+  background: #f8f8f8;
+  color: #b71c1c;
+  font-weight: 600;
+}
+
+.pickup-table tr:hover {
+  background: #fff3f3;
+}
+
+.pickup-table a {
+  color: #b71c1c;
+  text-decoration: underline;
+}
