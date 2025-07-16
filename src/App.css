@@ -1,129 +1,233 @@
-/* General page background and font */
+/* --- GLOBAL RESETS & FONTS --- */
 body, .App {
-  background: #fff;
+  background: #f5f5f5;
   color: #222;
   font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-/* Header styling */
+/* --- HEADER --- */
 .App-header {
-
-  color: #fff;
+  background: #fff;
+  color: #b71c1c;
   padding: 32px 0 16px 0;
-  border-bottom: 4px solid #d32f2f;
+  border-bottom: 4px solid #b71c1c;
   text-align: center;
   margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(183,28,28,0.06);
 }
 
 .App-header h1 {
   margin: 0;
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-size: 2.7rem;
+  font-weight: 800;
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-/* Wiki-style TOC nav */
-.js-toc {
+/* --- HERO IMAGE / SLIDESHOW TEMPLATE --- */
+.hero-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(183,28,28,0.08);
   background: #fff;
-  border: 1px solid #d32f2f;
-  border-radius: 8px;
-  padding: 12px 20px;
-  margin: 24px auto 32px auto;
-  width: fit-content;
-  box-shadow: 0 2px 8px rgba(183,28,28,0.05);
-  font-size: 1.1rem;
-  text-align: left;
-  position: fixed;
-  top: 80px;
-
+  display: flex;
+  align-items: center;
+  min-height: 280px;
+  position: relative;
 }
 
-.js-toc .toc-list {
-  list-style-type: disc;
-  display: block;
-  padding-left: 24px; /* space for bullets */
-  margin: 0;
-}
-
-.js-toc .toc-list-item {
+.hero-section img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
   display: block;
 }
 
-.js-toc .toc-link {
-  display: list-item;
+.hero-caption {
+  position: absolute;
+  left: 32px;
+  bottom: 32px;
+  background: rgba(255,255,255,0.92);
   color: #b71c1c;
-  text-decoration: none;
-  padding: 0 0px;
-  font-weight: 500;
-  transition: color 0.2s;
+  padding: 18px 32px;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(183,28,28,0.08);
 }
 
-.js-toc .toc-link:hover {
-  color: #fff;
+/* --- SLIDESHOW CONTROLS TEMPLATE --- */
+.slideshow-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 32px;
+  display: flex;
+  gap: 12px;
+}
+
+.slideshow-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
   background: #b71c1c;
-  border-radius: 4px;
-  padding: 2px 8px;
-  text-decoration: underline;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+  cursor: pointer;
 }
 
+.slideshow-dot.active {
+  opacity: 1;
+  border: 2px solid #fff;
+}
 
-/* Main content area */
+/* --- MAIN CONTENT --- */
 main {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(183,28,28,0.04);
-  padding: 32px 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(183,28,28,0.06);
+  padding: 40px 32px;
 }
 
-/* Headings */
+/* --- HEADINGS --- */
 h1, h2, h3, h4 {
   color: #b71c1c;
   font-family: 'Segoe UI', Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
 
 h2 {
-  border-bottom: 2px solid #d32f2f;
+  border-bottom: 2px solid #b71c1c;
   padding-bottom: 4px;
   font-size: 2rem;
 }
 
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 h4 {
-  font-size: 1.1rem;
+  font-size: 1.08rem;
 }
 
-/* Paragraphs and lists */
-p, ul, ol {
-  line-height: 1.7;
-  margin-bottom: 1.2em;
+/* --- TABLES --- */
+.pickup-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 32px;
+  font-size: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(183,28,28,0.04);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-ul, ol {
-  padding-left: 2em;
+.pickup-table th, .pickup-table td {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 14px 18px;
+  text-align: center;
 }
 
-/* Links */
-a {
+.pickup-table th {
+  background: #f8f8f8;
+  color: #b71c1c;
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: 1px;
+}
+
+.pickup-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pickup-table tr:hover {
+  background: #fff3f3;
+  transition: background 0.2s;
+}
+
+.pickup-table a {
   color: #b71c1c;
   text-decoration: underline;
-  transition: color 0.2s;
+  font-weight: 500;
 }
 
-a:hover {
+.pickup-table a:hover {
   color: #d32f2f;
 }
 
-/* Tab buttons */
+/* --- BUTTONS --- */
+button, .btn {
+  background: #b71c1c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 28px;
+  margin: 8px 4px 0 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(183,28,28,0.06);
+}
+
+button:hover, .btn:hover {
+  background: #d32f2f;
+  box-shadow: 0 2px 8px rgba(183,28,28,0.10);
+}
+
+.copy-btn {
+  background: #fff;
+  color: #b71c1c;
+  border: 1.5px solid #b71c1c;
+  padding: 4px 14px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  margin-left: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.copy-btn:hover {
+  background: #b71c1c;
+  color: #fff;
+}
+
+/* --- FORMS & INPUTS --- */
+form label {
+  color: #b71c1c;
+  font-weight: 600;
+}
+
+input, select, button {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+input[type="number"], select, input[type="text"] {
+  border: 1.5px solid #b71c1c;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 8px 0 16px 0;
+  width: 140px;
+  background: #fff;
+  transition: border 0.2s;
+}
+
+input[type="number"]:focus, select:focus, input[type="text"]:focus {
+  outline: 2px solid #d32f2f;
+  border-color: #d32f2f;
+}
+
+/* --- TABS --- */
 .tab-buttons {
   display: flex;
   justify-content: center;
@@ -136,10 +240,10 @@ a:hover {
   color: #b71c1c;
   padding: 10px 24px;
   cursor: pointer;
-  height: 40px;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: 6px 6px 0 0;
+  height: 44px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 8px 8px 0 0;
   margin: 0 4px;
   transition: background 0.2s, color 0.2s;
 }
@@ -152,19 +256,19 @@ a:hover {
 .active-tab-button {
   background-color: #b71c1c;
   color: #fff;
-  transform: scaleY(1.1);
+  transform: scaleY(1.08);
   transform-origin: bottom;
 }
 
-/* Tab content */
+/* --- TAB CONTENT --- */
 .tab {
   display: none;
-  width: 70%;
-  padding: 24px;
+  width: 80%;
+  padding: 32px 24px;
   background-color: #fff;
-  border: 1px solid #d32f2f;
-  border-radius: 0 0 8px 8px;
-  margin: 0 auto 32px auto;
+  border: 1.5px solid #d32f2f;
+  border-radius: 0 0 12px 12px;
+  margin: 0 auto 40px auto;
   box-shadow: 0 2px 8px rgba(183,28,28,0.04);
 }
 
@@ -172,51 +276,53 @@ a:hover {
   display: block;
 }
 
-/* Forms and inputs */
-form label {
+/* --- LINKS --- */
+a {
   color: #b71c1c;
-  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.2s;
 }
 
-input, select, button {
-  font-family: inherit;
-  font-size: 1rem;
+a:hover {
+  color: #d32f2f;
 }
 
-input[type="number"], select {
-  border: 1px solid #b71c1c;
-  border-radius: 4px;
-  padding: 6px 10px;
-  margin: 6px 0 12px 0;
-  width: 120px;
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 900px) {
+  main, .tab {
+    width: 98%;
+    padding: 18px 4vw;
+  }
+  .hero-section {
+    min-height: 180px;
+  }
 }
 
-input[type="number"]:focus, select:focus {
-  outline: 2px solid #d32f2f;
+@media (max-width: 600px) {
+  .App-header h1 {
+    font-size: 1.5rem;
+  }
+  .hero-section img {
+    height: 120px;
+  }
+  .hero-caption {
+    left: 10px;
+    bottom: 10px;
+    padding: 8px 12px;
+    font-size: 1rem;
+  }
+  .tab, main {
+    padding: 10px 2vw;
+    width: 100%;
+  }
+  .pickup-table th, .pickup-table td {
+    padding: 8px 4px;
+    font-size: 0.95rem;
+  }
 }
 
-button {
-  background: #b71c1c;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 18px;
-  margin: 8px 4px 0 0;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s;
-}
-
-button:hover {
-  background: #d32f2f;
-}
-
-/* Miscellaneous */
-::-webkit-scrollbar-thumb {
-  background: #b71c1c;
-}
-
-.glass-cutting-section {
+/* --- CARD/SECTION STYLES --- */
+.card, .glass-cutting-section {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(183,28,28,0.08);
@@ -228,8 +334,7 @@ button:hover {
   transition: box-shadow 0.2s;
 }
 
-
-.glass-cutting-section h2 {
+.card h2, .glass-cutting-section h2 {
   color: #b71c1c;
   font-size: 2.2rem;
   font-weight: 700;
@@ -239,72 +344,14 @@ button:hover {
   padding-bottom: 6px;
 }
 
-.glass-cutting-section p {
-  color: #333;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  margin-bottom: 0;
-}
-
-.glass-cutting-section ul,
-.glass-cutting-section ol {
-  margin: 18px 0 0 24px;
-  color: #444;
-  font-size: 1.08rem;
-}
-
-.glass-cutting-section strong,
-.glass-cutting-section b {
-  color: #b71c1c;
-  font-weight: 600;
-}
-
-.glass-cutting-section a {
-  color: #b71c1c;
-  text-decoration: underline;
-  transition: color 0.2s;
-}
-
-.glass-cutting-section a:hover {
-  color: #d32f2f;
-  text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-  .glass-cutting-section {
-    padding: 18px 8px;
-    font-size: 1rem;
-  }
-  .glass-cutting-section h2 {
-    font-size: 1.3rem;
-  } 
-}
-.pickup-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 24px;
-  font-size: 1rem;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(183,28,28,0.04);
-}
-
-.pickup-table th, .pickup-table td {
-  border: 1px solid #d32f2f;
-  padding: 10px 14px;
-  text-align: left;
-}
-
-.pickup-table th {
-  background: #f8f8f8;
-  color: #b71c1c;
-  font-weight: 600;
-}
-
-.pickup-table tr:hover {
-  background: #fff3f3;
-}
-
-.pickup-table a {
-  color: #b71c1c;
-  text-decoration: underline;
-}
+/* --- SLIDESHOW IMAGE TEMPLATE (for React) ---
+<div className="hero-section">
+  <img src="your-image-url.jpg" alt="Hero" />
+  <div className="hero-caption">Welcome to Ace Hardware!</div>
+  <div className="slideshow-controls">
+    <div className="slideshow-dot active"></div>
+    <div className="slideshow-dot"></div>
+    <div className="slideshow-dot"></div>
+  </div>
+</div>
+---------------------------------------------- */
