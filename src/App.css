@@ -322,7 +322,7 @@ a:hover {
 }
 
 /* --- CARD/SECTION STYLES --- */
-.card, .glass-cutting-section {
+.card, .glass-cutting-section, .propane-section, .online-order-section, .screen-section {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(183,28,28,0.08);
@@ -344,14 +344,180 @@ a:hover {
   padding-bottom: 6px;
 }
 
-/* --- SLIDESHOW IMAGE TEMPLATE (for React) ---
-<div className="hero-section">
-  <img src="your-image-url.jpg" alt="Hero" />
-  <div className="hero-caption">Welcome to Ace Hardware!</div>
-  <div className="slideshow-controls">
-    <div className="slideshow-dot active"></div>
-    <div className="slideshow-dot"></div>
-    <div className="slideshow-dot"></div>
-  </div>
-</div>
----------------------------------------------- */
+/* --- TOP RED BANNER --- */
+.top-banner {
+  width: 100%;
+  background: #b71c1c;
+  color: #fff;
+  padding: 0;
+  margin: 0;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.5px;
+  z-index: 1000;
+  position: relative;
+}
+
+.top-banner-links {
+  display: flex;
+  gap: 24px;
+  padding: 0 32px;
+}
+
+.top-banner-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s, text-decoration 0.2s;
+  padding: 0 4px;
+  line-height: 38px;
+}
+
+.top-banner-links a:hover {
+  color: #ffe082;
+  text-decoration: underline;
+}
+
+/* Responsive for banner */
+@media (max-width: 600px) {
+  .top-banner-links {
+    gap: 12px;
+    padding: 0 8px;
+    font-size: 0.95rem;
+  }
+}
+
+/* --- TOC BOX --- */
+.toc-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(183,28,28,0.08);
+  border: 1.5px solid #e0e0e0;
+  padding: 24px 20px 20px 20px;
+  margin: 32px auto 32px 0;
+  max-width: 320px;
+  min-width: 220px;
+  position: relative;
+  transition: box-shadow 0.2s;
+  font-size: 1rem;
+}
+
+.toc-box nav.js-toc {
+  padding: 0;
+  margin: 0;
+}
+
+.toc-box .toc-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc-box .toc-list-item {
+  margin-bottom: 8px;
+}
+
+.toc-box .toc-link {
+  color: #b71c1c;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s, background 0.2s;
+  padding: 2px 0;
+  display: block;
+  border-radius: 4px;
+  background: none;
+}
+
+/* Only highlight on hover */
+.toc-box .toc-link:hover {
+  color: #fff;
+  background: #b71c1c;
+  text-decoration: none;
+}
+
+/* Remove highlight from active link unless hovered */
+.toc-box .toc-link.is-active-link {
+  color: #b71c1c;
+  background: none;
+}
+.toc-box .toc-link.is-active-link:hover {
+  color: #fff;
+  background: #b71c1c;
+}
+
+@media (max-width: 900px) {
+  .toc-box {
+    max-width: 98vw;
+    min-width: 0;
+    margin: 24px auto;
+    font-size: 0.98rem;
+    padding: 14px 8px 12px 8px;
+  }
+}
+
+.main-top-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto 32px auto;
+  width: 100%;
+  position: relative;
+}
+
+.toc-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: 10;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(183,28,28,0.08);
+  border: 1.5px solid #e0e0e0;
+  padding: 24px 20px 20px 20px;
+  max-width: 320px;
+  min-width: 220px;
+  font-size: 1rem;
+}
+
+.hero-section {
+  flex: 1 1 0;
+  min-width: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  max-width: 900px;
+  padding: 0;
+}
+
+.hero-section img {
+  width: 100%;
+  height: 240px;
+  object-fit: scale-down;
+  display: block;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .main-top-row {
+    flex-direction: column;
+    gap: 16px;
+    max-width: 98vw;
+  }
+  .hero-section img {
+    height: 140px;
+  }
+}
