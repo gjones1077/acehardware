@@ -8,10 +8,15 @@ import './App.css';
 
 function App() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [tocOpen, setTocOpen] = useState(false);
 
   function toggleTab(index) {
     setActiveTabIndex(index);
   };
+
+  function toggleToc() {
+    setTocOpen(open => !open);
+  }
 
   useEffect(() => {
     tocbot.init({
@@ -39,15 +44,22 @@ function App() {
       <div className="App-header"> 
         <h1>Screen Shop Reference </h1>
       </div>
-      <div className='main-top-row'>
+      {/* Hamburger Button */}
+      <button
+        className={`toc-hamburger${tocOpen ? ' active' : ''}`}
+        onClick={toggleToc}
+        aria-label="Open Table of Contents"
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+      {/* Side Menu */}
+      <div className={`toc-side-menu${tocOpen ? ' open' : ''}`}>
         <div className='toc-box'>
           <nav className='js-toc'/>
         </div>
-        <div className='hero-section'>
-          <img src={aceEmblem} alt='Shop'/>
-        </div>
       </div>
-      
       <main>
         <div className="glass-cutting-section" id="glass-cutting">
         <h2 id="1">Glass Cutting</h2>
