@@ -45,7 +45,7 @@ function App() {
         <h1>Screen Shop Reference </h1>
       </div>
       {/* Hamburger Button */}
-      <button
+      {/* <button
         className={`toc-hamburger${tocOpen ? ' active' : ''}`}
         onClick={toggleToc}
         aria-label="Open Table of Contents"
@@ -53,15 +53,15 @@ function App() {
         <span />
         <span />
         <span />
-      </button>
+      </button> */}
       {/* Side Menu */}
-      <div className={`toc-side-menu${tocOpen ? ' open' : ''}`}>
+      {/* <div className={`toc-side-menu${tocOpen ? ' open' : ''}`}>
         <div className='toc-box'>
           <nav className='js-toc'/>
         </div>
-      </div>
+      </div> */}
       <main>
-        <div className="glass-cutting-section" id="glass-cutting">
+        {/* <div className="glass-cutting-section" id="glass-cutting">
         <h2 id="1">Glass Cutting</h2>
         <p>   
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dolore esse fugiat inventore mollitia
@@ -121,7 +121,7 @@ function App() {
         </div>
         <div className='online-order-section'>
         <h2 id="4">Returning online orders</h2>
-        </div>
+        </div> */}
         <div className='screen-section'>
         <h2 id="2">Screen Intake/Pickup</h2>
         <ScreenForms activeTabIndex={activeTabIndex} toggleTab={toggleTab}/>
