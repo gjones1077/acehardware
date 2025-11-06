@@ -38,7 +38,7 @@ function App() {
       <div className="top-banner">
         <div className="top-banner-links">
           <a href="https://acenet.aceservices.com/" target="_blank" rel="noopener noreferrer">AceNet</a>
-          <a href="https://www.repairstorm.com/" target="_blank" rel="noopener noreferrer">RepairStorm</a>
+          <a href="https://www.repairstorm.com/osa/dashboard" target="_blank" rel="noopener noreferrer">RepairStorm</a>
         </div>
       </div>
       <div className="App-header"> 
