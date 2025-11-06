@@ -44,6 +44,7 @@ function App() {
       <div className="App-header"> 
         <h1>Screen Shop Reference </h1>
       </div>
+      
       {/* Hamburger Button */}
       {/* <button
         className={`toc-hamburger${tocOpen ? ' active' : ''}`}

@@ -237,8 +237,9 @@ function ScreenForms({activeTabIndex, toggleTab}) {
                     <li ref={lastStepRef}>Take the beige ticket and use the wiring to attach it to the screen(s)</li>
                 </ol> }
                 <h3>Price Calculator</h3>
-                {formList.map((formData, index) => ( 
-                    <form id="container">
+                {formList.map((formData, index) => (
+                    <div class="in/out" id="forms-list">
+                    <form id="in-container">
                         <label>Length: </label>
                         <input name="length" 
                             type="number" 
@@ -290,6 +291,7 @@ function ScreenForms({activeTabIndex, toggleTab}) {
                             clearData={clearData}
                             onLastPriceUpdate={updateLastPrice}/>
                     </form>
+                    </div>
                 ))}
                 <button type="button" onClick={addForm}>Add Entry</button>
                 <button onClick={clearForms}>Reset</button>
@@ -298,7 +300,7 @@ function ScreenForms({activeTabIndex, toggleTab}) {
         <div className="tab" id="tab2" style={{ display: activeTabIndex === 1 ? "block" : "none" }}>
             <h3>Pickup Calculator</h3>
             {pformList.map((pformData, index) => (
-                <form key={index}>
+                <form id="out-container" key={index}>
                     <label>Length: </label>
                     <input
                         name="length"
