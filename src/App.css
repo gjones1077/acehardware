@@ -180,6 +180,12 @@ button, .btn {
   box-shadow: 0 1px 4px rgba(183,28,28,0.06);
 }
 
+.btn--remove {
+  margin-left: 160px;
+}
+.btn--remove-out {
+  margin-left: 219px;
+}
 button:hover, .btn:hover {
   background: #d32f2f;
   box-shadow: 0 2px 8px rgba(183,28,28,0.10);
@@ -399,60 +405,6 @@ a:hover {
   }
 }
 
-/* --- TOC BOX --- */
-.toc-box {
-  padding: 24px 20px 20px 20px;
-  margin: 32px auto 32px 0;
-  max-width: 320px;
-  min-width: 220px;
-  position: relative;
-  transition: box-shadow 0.2s;
-  font-size: 1rem;
-}
-
-.toc-box nav.js-toc {
-  padding: 0;
-  margin: 0;
-}
-
-.toc-box .toc-list {
-  list-style: none;
-  padding-left: 55px;
-  padding-top: 20px;
-  margin: 0;
-}
-
-.toc-box .toc-list-item {
-  margin-bottom: 8px;
-}
-
-.toc-box .toc-link {
-  color: #b71c1c;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s, background 0.2s;
-  padding: 2px 0;
-  display: block;
-  border-radius: 4px;
-  background: none;
-}
-
-/* Only highlight on hover */
-.toc-box .toc-link:hover {
-  color: #fff;
-  background: #b71c1c;
-  text-decoration: none;
-}
-
-/* Remove highlight from active link unless hovered */
-.toc-box .toc-link.is-active-link {
-  color: #b71c1c;
-  background: none;
-}
-.toc-box .toc-link.is-active-link:hover {
-  color: #fff;
-  background: #b71c1c;
-}
 
 @media (max-width: 900px) {
   .toc-box {
@@ -474,17 +426,6 @@ a:hover {
   position: relative;
 }
 
-.toc-box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
-  z-index: 10;
-  padding: 24px 20px 20px 20px;
-  max-width: 320px;
-  min-width: 220px;
-  font-size: 1rem;
-}
 
 .hero-section {
   flex: 1 1 0;
@@ -523,120 +464,6 @@ a:hover {
   }
 }
 
-/* Hamburger button */
-.toc-hamburger {
-  position: fixed;
-  top: 40px;
-  left: 20px;
-  z-index: 1201;
-  width: 44px;
-  height: 44px;
-  background: #fff;
-  border: 2px solid #b71c1c;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(183,28,28,0.08);
-  transition: background 0.2s;
-}
-
-.toc-hamburger span {
-  display: block;
-  width: 26px;
-  height: 4px;
-  background: #b71c1c;
-  border-radius: 2px;
-  transition: all 0.3s cubic-bezier(.4,0,.2,1);
-  position: relative;
-}
-
-/* Animate hamburger to X when menu is open */
-.toc-side-menu.open ~ .toc-hamburger span:nth-child(1),
-.toc-hamburger.active span:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
-}
-
-.toc-side-menu.open ~ .toc-hamburger span:nth-child(2),
-.toc-hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.toc-side-menu.open ~ .toc-hamburger span:nth-child(3),
-.toc-hamburger.active span:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
-}
-
-/* If you toggle a class on the button itself, use this instead: */
-.toc-hamburger.active span:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
-}
-.toc-hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.toc-hamburger.active span:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
-}
-
-/* Side menu */
-.toc-side-menu {
-  position: fixed;
-  top: 0;
-  left: -340px;
-  width: 320px;
-  height: 100vh;
-  background: #b71c1c; /* Red background */
-  box-shadow: 2px 0 16px rgba(183,28,28,0.12);
-  z-index: 1200;
-  transition: left 0.3s cubic-bezier(.4,0,.2,1);
-  display: flex;
-  flex-direction: column;
-  padding-top: 24px;
-}
-
-.toc-side-menu .toc-box {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(183,28,28,0.08);
-  border: 1.5px solid #e0e0e0;
-  padding: 24px 20px 20px 20px;
-  margin: 0 16px;
-  max-width: 288px;
-  min-width: 0;
-  font-size: 1rem;
-  position: relative;
-  top: 0;
-}
-.toc-side-menu.open {
-  left: 0;
-}
-
-/* Close button inside menu */
-.toc-close-btn {
-  background: none;
-  border: none;
-  color: #b71c1c;
-  font-size: 2.2rem;
-  font-weight: bold;
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  cursor: pointer;
-  z-index: 1202;
-  line-height: 1;
-}
-
-/* Overlay for mobile */
-.toc-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.18);
-  z-index: 1199;
-}
-
 #in-container {
   background: rgb(255, 255, 255);
   border: 1px solid #0000003a;
@@ -644,6 +471,8 @@ a:hover {
   padding: 20px;
   padding-bottom: 20px;
   box-shadow: 0 6px 18px rgb(112, 109, 109);
+  margin-bottom: 20px;
+  position: relative;
 }
 
 #out-container {
@@ -653,6 +482,8 @@ a:hover {
   padding: 20px;
   padding-bottom: 20px;
   box-shadow: 0 6px 18px rgb(112, 109, 109);
+  margin-bottom: 20px;
+  position: relative;
 }
 
 /* Hide toc-box in main layout when using side menu */

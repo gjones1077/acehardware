@@ -88,7 +88,7 @@ function Pricing(props) {
                     console.log(doc.id, " => ", doc.data());
                 });
                 
-                setDisplayText(`Match Found! ${data.length}x${data.height} `);
+                setDisplayText(`${quantity}x ${material} (${data.length}x${data.height}) `);
                 updateTotal(false, adjustedPrice);
             }
         }     
@@ -104,6 +104,7 @@ function Pricing(props) {
             </button>
             {index > 0 ? 
                 <button type="button" 
+                    className="btn btn--remove"
                     onClick={() => removeEntry(index)}>
                     Remove Entry
                 </button>  

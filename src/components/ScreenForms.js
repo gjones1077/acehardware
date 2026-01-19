@@ -3,6 +3,7 @@ import { db } from '../config/firebase';
 import { getDocs, collection } from 'firebase/firestore';
 import Pricing from "./Pricing";
 import MatsTable from "./MatsTable"
+import GenRepStormModal from './GenRepStormModal';
 /* TODOs:
     -By Friday:
         -Test calculator functionality
@@ -47,6 +48,8 @@ function ScreenForms({activeTabIndex, toggleTab}) {
     const [pformList, setPFormList] = useState([
         { length: "", height: "", quantity: 1 }  //add materials after main function working 
     ]);
+
+    const [openModal, setOpenModal] = useState(false);
 
     const handleLengthChange = (event) => {
         const value = event.target.value;
@@ -294,7 +297,9 @@ function ScreenForms({activeTabIndex, toggleTab}) {
                     </div>
                 ))}
                 <button type="button" onClick={addForm}>Add Entry</button>
+                {openModal && <GenRepStormModal />}
                 <button onClick={clearForms}>Reset</button>
+                <button className="openModalBtn" onClick={() => {setOpenModal(true); }}>Generate RepairStorm Data</button>
                 <h3>Total Price: ${runningTotal}.00</h3>
             </div>
         <div className="tab" id="tab2" style={{ display: activeTabIndex === 1 ? "block" : "none" }}>
@@ -338,12 +343,10 @@ function ScreenForms({activeTabIndex, toggleTab}) {
                     />
                     <br />
                     <button type="button" onClick={() => calcMats(index)}>Calculate Materials</button>
-                    <p>{pickupDisplayTexts[index]}</p>
-
                     {index > 0 ? (
-                        <button
+                        <button 
                             type="button"
-                            className="close-btn"
+                            className="btn btn--remove-out"
                             onClick={() => {
                                 const updated = pformList.filter((_, i) => i !== index);
                                 setPFormList(updated);
@@ -351,9 +354,12 @@ function ScreenForms({activeTabIndex, toggleTab}) {
                             aria-label="Remove Entry"
                             title="Remove Entry"
                         >
-                            &times;
+                            Remove Size
                         </button>
                     ) : null}
+                    <p>{pickupDisplayTexts[index]}</p>
+
+                    
                 </form>
             ))}
         <button type="button" onClick={paddForm}>Add New Size</button>
